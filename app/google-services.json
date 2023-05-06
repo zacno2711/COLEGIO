@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "997127203711",
+    "project_id": "colegioprincipal-a605e",
+    "storage_bucket": "colegioprincipal-a605e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997127203711:android:1892e2076e3b39844c484a",
+        "android_client_info": {
+          "package_name": "com.example.colegio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997127203711-2oj41kcl5e81sr2bbnlc5h7ojk4jd8f1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhFRngqCvpT_sqB4ztpgzwIRB7S-ca4fI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997127203711-2oj41kcl5e81sr2bbnlc5h7ojk4jd8f1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btestudiante"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:textSize="35dp"
+        android:onClick="Estudiante"
+        android:layout_marginTop="250dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Estudiante" />
+
+    <Button
+        android:id="@+id/btmaterias"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:textSize="35dp"
+        android:layout_marginTop="15dp"
+        android:onClick="Materias"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Materias" />
+
+    <Button
+        android:id="@+id/btmatriculas"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:textSize="35dp"
+        android:onClick="Matricula"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Matriculas" />
+</LinearLayout>
