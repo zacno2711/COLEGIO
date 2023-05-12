@@ -3,6 +3,7 @@ package com.example.colegio;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -156,5 +157,9 @@ public class EstudiantesActivity extends AppCompatActivity {
         jetnombre.setText("");
         jcbactivo.setChecked(false);
         jetcarnet.requestFocus();
+    }
+    public void Regresar(View view){
+        Intent int_main=new Intent(this,MainActivity.class);
+        startActivity(int_main);
     }
 }

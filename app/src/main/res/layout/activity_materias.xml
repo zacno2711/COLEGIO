@@ -3,18 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".EstudiantesActivity">
 
     <TextView
         android:id="@+id/tvtitulo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textSize="30dp"
-        android:gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Materias" />
+        android:gravity="center"
+        android:lineSpacingExtra="8dp"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="Materias"
+        android:textAllCaps="false"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        android:typeface="monospace" />
+
     <LinearLayout
         android:layout_width="370dp"
         android:layout_height="50dp"
@@ -24,76 +32,102 @@
 
         <EditText
             android:id="@+id/etcodigo"
-            android:layout_width="205dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
             android:gravity="center"
             android:hint="Codigo"
             android:inputType="text"
+            android:singleLine="false"
             android:textSize="30dp" />
 
-        <Button
-            android:id="@+id/btconsultar"
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/btConsultar"
+            android:layout_width="35dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
+            android:layout_gravity="center"
             android:onClick="Consultar"
-            android:text="Consultar"
-            android:textSize="22dp"
-            />
+            android:contentDescription="Icono consultar"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_search" />
 
     </LinearLayout>
 
 
-
-    <EditText
-        android:id="@+id/etnombreM"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:enabled="false"
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:hint="Nombre de la materia"
-        android:ems="10"
-        android:inputType="text" />
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/etnombreM"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="center"
+            android:inputType="text"
+            android:textSize="30dp"
+            android:visibility="invisible" />
 
-    <EditText
-        android:id="@+id/etcreditos"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:enabled="false"
-        android:hint="Creditos de la materia"
-        android:ems="10"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/etcreditos"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="center"
+            android:inputType="text"
+            android:textSize="30dp"
+            android:visibility="invisible" />
 
-    <EditText
-        android:id="@+id/etprofesor"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:enabled="false"
-        android:hint="Nombre del profesor"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/etprofesor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:textSize="30dp"
+            android:visibility="invisible" />
+    </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/cbactivo"
+
+    <LinearLayout
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:textSize="30dp"
-        android:enabled="false"
         android:layout_marginTop="10dp"
-        android:text=" Activo" />
+        android:orientation="horizontal">
 
+        <CheckBox
+            android:id="@+id/cbactivo"
+            android:layout_width="174dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:onClick="CheckActivar"
+            android:text=" Activo"
+            android:textSize="30dp"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btActivar"
+            android:layout_width="194dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:onClick="Activar"
+            android:text="Activar"
+            android:textSize="22dp"
+            android:visibility="invisible" />
+    </LinearLayout>
 
 
     <LinearLayout
@@ -105,56 +139,63 @@
 
         <Button
             android:id="@+id/btGuardar"
-            android:layout_width="wrap_content"
+            android:layout_width="269dp"
             android:layout_height="50dp"
-            android:onClick="Guardar"
             android:layout_weight="1"
             android:enabled="false"
+            android:onClick="Guardar"
+            android:text="GUARDAR"
             android:textSize="22dp"
-            android:text="Guardar" />
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:onClick="Cancelar"
-            android:textSize="22dp"
+            android:layout_width="191dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:onClick="Cancelar"
+            android:text="Cancelar"
+            android:textSize="22dp"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="370dp"
+        android:layout_width="223dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btActivar"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnAnular"
+            android:layout_width="269dp"
             android:layout_height="50dp"
-            android:onClick="Activar"
             android:layout_weight="1"
+            android:onClick="Anular"
+            android:text="ANULAR"
             android:textSize="22dp"
-            android:enabled="false"
-            android:text="Activar" />
+            android:visibility="invisible"></Button>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="370dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:id="@+id/btnRegresar"
+        android:layout_width="100dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="120dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:contentDescription="Icono regresar"
+        android:onClick="Regresar"
+        app:srcCompat="?attr/homeAsUpIndicator" />
 
-        <Button
-            android:id="@+id/btregresar"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:textSize="22dp"
-            android:text="Regresar" />
-    </LinearLayout>
+
 </LinearLayout>
