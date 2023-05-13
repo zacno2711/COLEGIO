@@ -91,6 +91,8 @@ public class MateriasActivity extends AppCompatActivity {
                         Hint(false);
                         VisivilityBtn(false);
                         Limpiar_campos();
+                        jetcodigo.setEnabled(true);
+                        jetcodigo.requestFocus();
                         jetbtnAnular.setVisibility(View.INVISIBLE);
                         Toast.makeText(MateriasActivity.this, "Materia eliminada ...", Toast.LENGTH_SHORT).show();
                     }
