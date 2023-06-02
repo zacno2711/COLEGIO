@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvestudiantes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivimagen"
+                android:layout_width="100dp"
+                android:layout_height="121dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvcarnet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Carnet"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvnombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvcarrera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Carrera"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvsemestre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Semestre"
+                    android:layout_marginLeft="10dp"/>
+
+                <CheckBox
+                    android:id="@+id/cbactivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text=" Activo" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

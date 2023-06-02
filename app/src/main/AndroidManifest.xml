@@ -12,6 +12,15 @@
         android:theme="@style/Theme.COLEGIO"
         tools:targetApi="31">
         <activity
+            android:name=".ListarEstudiantesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EstudianteAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ClsEstudiantes"
+            android:exported="false" />
+        <activity
             android:name=".MateriasActivity"
             android:exported="false" />
         <activity

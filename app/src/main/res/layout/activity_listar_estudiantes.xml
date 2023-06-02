@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ListarEstudiantesActivity">
+
+    <TextView
+        android:id="@+id/tvtitulo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Estudiantes"
+        android:textSize="30dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvlistarestudiantes"
+        android:layout_width="370dp"
+        android:layout_height="550dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:id="@+id/btregresar"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:onClick="Regresar"
+        android:text="Regresar"
+        android:textSize="25dp" />
+</LinearLayout>

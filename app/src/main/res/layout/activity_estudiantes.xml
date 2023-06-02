@@ -66,7 +66,6 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:textSize="30dp"
-        android:enabled="false"
         android:layout_marginTop="10dp"
         android:text=" Activo" />
 
@@ -118,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textSize="22dp"
+            android:onClick="Eliminar"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="Eliminar" />
@@ -135,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:onClick="Anular"
             android:textSize="22dp"
             android:text="Anular" />
 
@@ -143,9 +144,27 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textSize="22dp"
+            android:onClick="Cancelar"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="Cancelar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btconsultagen"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:onClick="Consulta_general"
+            android:textSize="22dp"
+            android:text="Consulta general" />
     </LinearLayout>
 
     <LinearLayout

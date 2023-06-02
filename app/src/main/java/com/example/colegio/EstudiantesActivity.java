@@ -40,6 +40,7 @@ public class EstudiantesActivity extends AppCompatActivity {
         jetcarrera=findViewById(R.id.etcarrera);
         jetsemestre=findViewById(R.id.etsemestre);
         jcbactivo=findViewById(R.id.cbactivo);
+        id_documento="";
     }
 
     public void Adicionar(View view){
@@ -58,29 +59,38 @@ public class EstudiantesActivity extends AppCompatActivity {
             estudiante.put("Carrera", carrera);
             estudiante.put("Semestre", semestre);
             estudiante.put("Activo", "Si");
-
-// Add a new document with a generated ID
-            db.collection("Estudiantes")
-                    .add(estudiante)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            Limpiar_campos();
-                            Toast.makeText(EstudiantesActivity.this, "Documento guardado", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Log.w(TAG, "Error adding document", e);
-                            Toast.makeText(EstudiantesActivity.this, "Error guardando documento", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            //Consulta para verificar que no existe
+            Consultar_documento();
+            if (id_documento.equals("")) {
+                // Add a new document with a generated ID
+                db.collection("Estudiantes")
+                        .add(estudiante)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                Limpiar_campos();
+                                Toast.makeText(EstudiantesActivity.this, "Documento guardado", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Log.w(TAG, "Error adding document", e);
+                                Toast.makeText(EstudiantesActivity.this, "Error guardando documento", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }else{
+                Toast.makeText(this, "Carnet ya registrado", Toast.LENGTH_SHORT).show();
+            }
         }
     }//fin adicionar
 
     public void Consultar(View view){
+        Consultar_documento();
+    }
+
+    private void Consultar_documento(){
         carnet=jetcarnet.getText().toString();
         if (carnet.isEmpty()){
             Toast.makeText(this, "numero de carnet es requerido", Toast.LENGTH_SHORT).show();
@@ -95,6 +105,7 @@ public class EstudiantesActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     id_documento=document.getId();
+                                    // jetcarnet.setEnabled(false);
                                     jetnombre.setText(document.getString("Nombre"));
                                     jetcarrera.setText(document.getString("Carrera"));
                                     jetsemestre.setText(document.getString("Semestre"));
@@ -105,7 +116,7 @@ public class EstudiantesActivity extends AppCompatActivity {
                                     //  Log.d(TAG, document.getId() + " => " + document.getData());
                                 }
                             } else {
-                                Toast.makeText(EstudiantesActivity.this, "Estudiante no existe", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EstudiantesActivity.this, "Documento no hallado", Toast.LENGTH_SHORT).show();
                                 // Log.w(TAG, "Error getting documents.", task.getException());
                             }
                         }
@@ -114,40 +125,122 @@ public class EstudiantesActivity extends AppCompatActivity {
     }//Fin consultar
 
     public void Modificar(View view){
-        carnet=jetcarnet.getText().toString();
-        nombre=jetnombre.getText().toString();
-        carrera=jetcarrera.getText().toString();
-        semestre=jetsemestre.getText().toString();
-        if (carnet.isEmpty() || nombre.isEmpty() || carrera.isEmpty() || semestre.isEmpty()){
-            Toast.makeText(this, "Datos requeridos", Toast.LENGTH_SHORT).show();
-            jetcarnet.requestFocus();
+        if (!id_documento.equals("")) {
+            carnet = jetcarnet.getText().toString();
+            nombre = jetnombre.getText().toString();
+            carrera = jetcarrera.getText().toString();
+            semestre = jetsemestre.getText().toString();
+            if (carnet.isEmpty() || nombre.isEmpty() || carrera.isEmpty() || semestre.isEmpty()) {
+                Toast.makeText(this, "Datos requeridos", Toast.LENGTH_SHORT).show();
+                jetcarnet.requestFocus();
+            } else {
+                // Create a new student with a first and last name
+                Map<String, Object> estudiante = new HashMap<>();
+                estudiante.put("Carnet", carnet);
+                estudiante.put("Nombre", nombre);
+                estudiante.put("Carrera", carrera);
+                estudiante.put("Semestre", semestre);
+                if (jcbactivo.isChecked())
+                    estudiante.put("Activo", "Si");
+                else
+                    estudiante.put("Activo", "No");
+                db.collection("Estudiantes").document(id_documento)
+                        .set(estudiante)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(EstudiantesActivity.this, "Documento actualizado...", Toast.LENGTH_SHORT).show();
+                                Limpiar_campos();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EstudiantesActivity.this, "Error actualizando documento...", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }else{
-            // Create a new student with a first and last name
-            Map<String, Object> estudiante = new HashMap<>();
-            estudiante.put("Carnet", carnet);
-            estudiante.put("Nombre", nombre);
-            estudiante.put("Carrera",carrera);
-            estudiante.put("Semestre", semestre);
-            estudiante.put("Activo", "Si");
-            db.collection("Estudiantes").document(id_documento)
-                    .set(estudiante)
+            Toast.makeText(this, "Debe primero consultar para modificar", Toast.LENGTH_SHORT).show();
+            jetcarnet.requestFocus();
+        }
+    } //Fin modificar
 
+    public void Eliminar(View view){
+        if (!id_documento.equals("")){
+            db.collection("Estudiantes").document(id_documento)
+                    .delete()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(EstudiantesActivity.this,"Documento actualizado...",Toast.LENGTH_SHORT).show();
                             Limpiar_campos();
+                            Toast.makeText(EstudiantesActivity.this,"Documento eliminado ...",Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EstudiantesActivity.this,"Error actualizando documento...",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EstudiantesActivity.this,"Error eliminando documento...",Toast.LENGTH_SHORT).show();
                         }
                     });
 
+        }else{
+            Toast.makeText(this, "Debe primero consultar para eliminar", Toast.LENGTH_SHORT).show();
+            jetcarnet.requestFocus();
         }
+    }
 
+    public void Anular(View view){
+        if (!id_documento.equals("")){
+            carnet = jetcarnet.getText().toString();
+            nombre = jetnombre.getText().toString();
+            carrera = jetcarrera.getText().toString();
+            semestre = jetsemestre.getText().toString();
+            if (carnet.isEmpty() || nombre.isEmpty() || carrera.isEmpty() || semestre.isEmpty()) {
+                Toast.makeText(this, "Datos requeridos", Toast.LENGTH_SHORT).show();
+                jetcarnet.requestFocus();
+            } else {
+                // Create a new student with a first and last name
+                Map<String, Object> estudiante = new HashMap<>();
+                // estudiante.put("Carnet", carnet);
+                estudiante.put("Nombre", nombre);
+                estudiante.put("Carrera", carrera);
+                estudiante.put("Semestre", semestre);
+                estudiante.put("Activo", "No");
+                db.collection("Estudiantes").document(id_documento)
+                        .set(estudiante)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(EstudiantesActivity.this, "Documento actualizado...", Toast.LENGTH_SHORT).show();
+                                Limpiar_campos();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EstudiantesActivity.this, "Error actualizando documento...", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }else{
+            Toast.makeText(this, "Debe primero consultar para anular", Toast.LENGTH_SHORT).show();
+            jetcarnet.requestFocus();
+        }
+    }
+
+    public void Cancelar(View view){
+        Limpiar_campos();
+    }
+
+    public void Consulta_general(View view){
+        Intent intlistar=new Intent(this,ListarEstudiantesActivity.class);
+        startActivity(intlistar);
+    }
+
+    public void Regresar(View view){
+        Intent intmain=new Intent(this,MainActivity.class);
+        startActivity(intmain);
     }
 
     private void Limpiar_campos(){
@@ -157,9 +250,6 @@ public class EstudiantesActivity extends AppCompatActivity {
         jetnombre.setText("");
         jcbactivo.setChecked(false);
         jetcarnet.requestFocus();
-    }
-    public void Regresar(View view){
-        Intent int_main=new Intent(this,MainActivity.class);
-        startActivity(int_main);
+        id_documento="";
     }
 }
